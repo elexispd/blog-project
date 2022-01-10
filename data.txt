@@ -1,0 +1,51 @@
+<!-- comment section -->
+ <?php   
+                            // $obj->message();
+                            // foreach ($comments as $value) {?>
+                              <div class="mt-3  "><span style="padding: 10px; border-radius: 50px;" class="bg-info text-white" id="who"><?php //echo substr_replace($value["user_email"], "", 1); ?></span> <i class="text-info">says: </i><span class="lead text-secondary" id="says"><?php  //echo $value["comment_text"]?></span>
+                              </div>
+                            <?php  // } 
+                         ?>
+
+
+<?php 
+                		foreach ($single as $value) {?>
+                		<h2 class="fw-bolder mt-5"><?php echo $value["article_title"]; ?></h2>
+                		<div class="mb-4">
+                			<div class="row">
+                				<!-- <span class="text-danger" style="font-size: 20px;"></span> -->
+                				<div class="col-6"><span class="text-danger" style="font-size: 20px;">A</span><span class="text-muted">uthor: 	</span><?php echo ucfirst($value["article_author"]); ?></div>
+	                			<div class="col-6"><span class="text-danger" style="font-size: 20px;">D</span><span class="text-muted">ate Of Publication: </span> <?php echo ($value["article_date"]); ?></div>
+                			</div>
+                			
+                		</div>
+	                		
+		                	<div>
+		                		<img src="admin/<?php echo $imag; ?>" style="object-fit: all; height: 350px; width: 100%;" alt="image">
+		                	</div>
+                			<p class="mt-3"> 
+                				<?php echo $value["article_text"]; ?>
+                			</p>
+                    <?php               $article_category = $value["category"];}
+                    ?>
+
+
+
+       <h2 class="text-primary">Related Articles</h2>
+                    
+                        
+                        <?php  
+                            $related = $obj->relatedArticles($article_category);
+                            foreach ($related as  $valueR) {?>
+                            <div class="card">
+                                <div class="card-body row">
+                                    <img class="img-card col-4" src="admin/<?php echo $valueR["article_image"]; ?>" style="object-fit: all; height: 200px;" alt="image"></img>
+                                    <div class="col-8">
+                                        <div class="small text-muted"><?php echo $valueR["article_date"]; ?></div>
+                                        <h2 class="card-title"><?php echo $valueR["article_title"]; ?></h2>
+                                        <p class="card-text"><?php echo substr_replace($valueR['article_text'], "", 90); ?></p>
+                                        <a class="btn btn-primary" href="blog.php?id=<?php echo  $valueR["article_id"]; ?>&topic=<?php echo  $valueR["article_title"]; ?>">Read more →</a>
+                                    </div>
+                                </div>
+                            </div>     
+                        <?php } ?>  
